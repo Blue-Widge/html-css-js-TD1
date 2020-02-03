@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>TD1-Addresse IP</title>
+</head>
+<body>
+  <form>
+	<label>IP1 à rentrer : </label><input id="IP1" name="IP1" type="text"/>
+	<label>IP2 à rentrer : </label><input id="IP2" name="IP2" type="text"/>
+	<input type="submit" value="Calculer" onclick="recup()"/>
+  </form>
+  <div id="IP1">...</div>
+<div id="IP2">...</div>
+</body>
+<!-- <script src="td1.js"></script> -->
+<script>
+function recup()
+{
+	var adresse1= (document.getElementById("IP1")).value;
+	console.log("adresse1");
+	var adresse2 = (document.getElementById("IP2")).value;
+	document.getElementById("IP1").innerHTML=adresse1;
+	document.getElementById("IP2").innerHTML=adresse2;
+}</script>
+</html>
