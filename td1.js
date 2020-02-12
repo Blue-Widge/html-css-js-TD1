@@ -1,6 +1,5 @@
-function Reseau(Oct_adresse)
+function Reseau(Oct_adresse,masque)
 {
-	var masque=[255,255,255,0];
 	var Oct_adresseReseau=[0,0,0,0];
 	for (var i=0; i<4; i++)
 	{
@@ -8,9 +7,8 @@ function Reseau(Oct_adresse)
 	}
 	return Oct_adresseReseau;
 }
-function hostID()
+function hostID(masque)
 {
-	var masque=[255,255,255,0];
 	var HOST_ID=[0,0,0,0];
 	for (var i=0; i<4; i++)
 	{
@@ -48,19 +46,41 @@ function octets(adresse)
 	}	
 	return (Oct_adresses);
 }
-
+function Masque(masque)
+{
+	var masqueFinal=["","","",""];
+	var point = 0;
+	for (var i=0; i<masque.length; i++)
+	{
+		if (masque[i] == '.' ){
+			point++;
+			continue;
+		}
+		switch (point)
+		{
+			case 0: masqueFinal[0]+=masque[i]; break;
+			case 1: masqueFinal[1]+=masque[i]; break;
+			case 2: masqueFinal[2]+=masque[i]; break;
+			case 3: masqueFinal[3]+=masque[i]; break;
+		}
+	}	
+	return masqueFinal;
+}
 
 function recup()
 {
 	var adresse1= document.getElementById("ip1Input").value;
 	var Oct_adresse1=octets(adresse1);
 	var adresse2 = document.getElementById("ip2Input").value;
+	var masqueIP=document.getElementById("MasqueInput").value;
+	var masque=Masque(masqueIP);
 	var Oct_adresse2=octets(adresse2);
-	var Oct_adresseReseau1=Reseau(Oct_adresse1);
-	var host_ID=hostID();
+	var Oct_adresseReseau1=Reseau(Oct_adresse1,masque);
+	var host_ID=hostID(masque);
 	var net_ID=netID(host_ID);
 	document.getElementById("IP1").innerHTML="Adresse 1 : " + Oct_adresse1;
 	document.getElementById("IP2").innerHTML="Adresse 2 : "+Oct_adresse2;
+	document.getElementById("IPreseau").innerHTML="Adresse reseau :"+Oct_adresseReseau1;
 	document.getElementById("netID").innerHTML="NET ID : " + net_ID;
 	document.getElementById("hostID").innerHTML="HOST ID : "+host_ID;
 }
