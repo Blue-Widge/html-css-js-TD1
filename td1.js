@@ -131,7 +131,30 @@ function broadcast(host,reseau)
 	return broadcast;
 }
 
+var valid=true;
 
+function validIP(Octets)
+{
+	for (var i=0; i<4; i++)
+	{
+		if (isNaN(Octets[i]))
+		{
+			console.log(Octets[i]);
+			document.getElementById("error").innerHTML="VEUILLEZ ENTRER DES ELEMENTS VALIDES";
+			valid=false;
+		}
+		else if(Octets[i]>255)
+		{
+			document.getElementById("error").innerHTML="VEUILLEZ ENTRER DES ELEMENTS VALIDES";
+			valid=false;
+		}
+		else
+		{
+			valid=true;
+			document.getElementById("error").innerHTML=""
+		}
+	}
+}
 function recup()
 {
 	var adresse1= document.getElementById("ip1Input").value;
@@ -139,6 +162,10 @@ function recup()
 	var adresse2 = document.getElementById("ip2Input").value;
 	var masqueIP=document.getElementById("MasqueInput").value;
 	var masque=Masque(masqueIP);
+	validIP(masque);
+	validIP(Oct_adresse1);
+	if (valid==true)
+	{
 	var Oct_adresse2=octets(adresse2);
 	var Oct_adresseReseau1=Reseau(Oct_adresse1,masque);
 	var host_ID=hostID(masque);
@@ -154,6 +181,7 @@ function recup()
 	document.getElementById("Nb_adresse").innerHTML="Nombres d'adresses disponibles : "+Nb_adresses;
 	document.getElementById("broadcast_adresse").innerHTML="Adresse de diffusion : "+adresse_broadcast;
 	document.getElementById("dernière_adresse").innerHTML="Dernière adresse : "+adresse_broadcast[0]+","+adresse_broadcast[1]+","+adresse_broadcast[2]+","+(adresse_broadcast[3]-1);
+	}
 }
 
 //document.write(orginalIP);
