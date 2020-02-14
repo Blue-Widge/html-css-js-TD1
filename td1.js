@@ -220,22 +220,32 @@ function recup()
 	validIP(Oct_adresse1);
 	if (valid==true)
 	{
-	var Oct_adresse2=octets(adresse2);
-	var Oct_adresseReseau1=Reseau(Oct_adresse1,masque);
-	var host_ID=hostID(masque);
-	var net_ID=netID(host_ID);
-	var Nb_adresses=nb_adresse(masque);
-	var adresse_broadcast=broadcast(host_ID,Oct_adresseReseau1);
-	document.getElementById("masque").innerHTML="Masque : "+masque;
-	document.getElementById("IP1").innerHTML="Adresse 1 : " + Oct_adresse1;
-	document.getElementById("IP2").innerHTML="Adresse 2 : "+Oct_adresse2;
-	document.getElementById("IPreseau").innerHTML="Adresse reseau :"+Oct_adresseReseau1;
-	document.getElementById("netID").innerHTML="NET ID : " + net_ID;
-	document.getElementById("hostID").innerHTML="HOST ID : "+host_ID;
-	document.getElementById("première_adresse").innerHTML="Première adresse : "+Oct_adresseReseau1[0]+","+Oct_adresseReseau1[1]+","+Oct_adresseReseau1[2]+","+(Oct_adresseReseau1[3]+1);
-	document.getElementById("Nb_adresse").innerHTML="Nombres d'adresses disponibles : "+Nb_adresses;
-	document.getElementById("broadcast_adresse").innerHTML="Adresse de diffusion : "+adresse_broadcast;
-	document.getElementById("dernière_adresse").innerHTML="Dernière adresse : "+adresse_broadcast[0]+","+adresse_broadcast[1]+","+adresse_broadcast[2]+","+(adresse_broadcast[3]-1);
+		var Oct_adresse2=octets(adresse2);
+		var Oct_adresseReseau1=Reseau(Oct_adresse1,masque);
+		var Oct_adresseReseau2=Reseau(Oct_adresse2,masque);
+		var host_ID=hostID(masque);
+		var net_ID=netID(host_ID);
+		var Nb_adresses=nb_adresse(masque);
+		var adresse_broadcast=broadcast(host_ID,Oct_adresseReseau1);
+		document.getElementById("masque").innerHTML="Masque : "+masque;
+		document.getElementById("IP1").innerHTML="Adresse 1 : " + Oct_adresse1;
+		document.getElementById("IP2").innerHTML="Adresse 2 : "+Oct_adresse2;
+		document.getElementById("IPreseau").innerHTML="Adresse reseau :"+Oct_adresseReseau1;
+		document.getElementById("netID").innerHTML="NET ID : " + net_ID;
+		document.getElementById("hostID").innerHTML="HOST ID : "+host_ID;
+		document.getElementById("première_adresse").innerHTML="Première adresse : "+Oct_adresseReseau1[0]+","+Oct_adresseReseau1[1]+","+Oct_adresseReseau1[2]+","+(Oct_adresseReseau1[3]+1);
+		document.getElementById("Nb_adresse").innerHTML="Nombres d'adresses disponibles : "+Nb_adresses;
+		document.getElementById("broadcast_adresse").innerHTML="Adresse de diffusion : "+adresse_broadcast;
+		document.getElementById("dernière_adresse").innerHTML="Dernière adresse : "+adresse_broadcast[0]+","+adresse_broadcast[1]+","+adresse_broadcast[2]+","+(adresse_broadcast[3]-1);
+		console.log(Oct_adresseReseau1 + " " + Oct_adresseReseau2);
+		if (Oct_adresseReseau1[0]==Oct_adresseReseau2[0] &&Oct_adresseReseau1[1]==Oct_adresseReseau2[1] &&Oct_adresseReseau1[2]==Oct_adresseReseau2[2] &&Oct_adresseReseau1[3]==Oct_adresseReseau2[3])
+		{
+			document.getElementById("meme_reseau").innerHTML="Ils appartiennent au même réseau";
+		}
+		else
+		{
+			document.getElementById("meme_reseau").innerHTML="Ils n'appartiennent pas au même réseau";
+		}
 	}
 }
 
